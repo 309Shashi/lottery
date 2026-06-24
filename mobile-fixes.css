@@ -1,7 +1,10 @@
 /* Keeps the cash-detail rows inside even the narrowest phone screens. */
+html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: hidden; }
 .print-worksheet { display: none; }
-.ticket-keypad { position: fixed; z-index: 50; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 10px; background: #102a43; box-shadow: 0 -4px 16px #102a4360; }
+.ticket-fields input { font-size: 16px !important; }
+body.keypad-open main { padding-bottom: 330px; }
+.ticket-keypad { position: fixed; z-index: 50; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 10px; padding-bottom: max(10px, env(safe-area-inset-bottom)); background: #102a43; box-shadow: 0 -4px 16px #102a4360; transform: translateZ(0); }
 .ticket-keypad button { min-height: 44px; border: 0; border-radius: 7px; background: #fff; color: #102a43; font: 700 20px system-ui, sans-serif; }
 .ticket-keypad .keypad-next { grid-column: 1 / -1; background: #007c66; color: #fff; font-size: 16px; }
 .ticket-keypad .keypad-hide { grid-column: 1 / -1; min-height: 34px; background: #d9e2ec; color: #243b53; font-size: 14px; }

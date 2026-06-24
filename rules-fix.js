@@ -83,11 +83,14 @@ let activeTicketInput = null;
 
 function showTicketKeypad(input) {
   activeTicketInput = input;
+  document.body.classList.add('keypad-open');
   $('ticketKeypad').classList.remove('hidden');
+  requestAnimationFrame(() => input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' }));
 }
 
 function hideTicketKeypad() {
   activeTicketInput = null;
+  document.body.classList.remove('keypad-open');
   $('ticketKeypad').classList.add('hidden');
 }
 
