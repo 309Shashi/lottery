@@ -95,6 +95,10 @@ $('ticketKeypad').addEventListener('pointerdown', event => event.preventDefault(
 $('ticketKeypad').addEventListener('click', event => {
   const key = event.target.dataset.key;
   if (!key || !activeTicketInput) return;
+  if (key === 'hide') {
+    hideTicketKeypad();
+    return;
+  }
   if (key === 'next') {
     const fields = [...document.querySelectorAll('.ticket-list .opening, .ticket-list .closing')];
     const position = fields.indexOf(activeTicketInput);
@@ -106,6 +110,11 @@ $('ticketKeypad').addEventListener('click', event => {
   else if (key === '-') activeTicketInput.value = activeTicketInput.value === '-' ? '' : '-';
   else activeTicketInput.value = activeTicketInput.value === '-' ? key : `${activeTicketInput.value}${key}`;
   activeTicketInput.dispatchEvent(new Event('input', { bubbles: true }));
+});
+document.addEventListener('pointerdown', event => {
+  if (!activeTicketInput) return;
+  if (event.target.closest('#ticketKeypad, .opening, .closing')) return;
+  hideTicketKeypad();
 });
 
 function updateTicketCard(card, index) {
