@@ -79,6 +79,35 @@ window.addEventListener('beforeunload', event => {
   event.returnValue = '';
 });
 
+let activeTicketInput = null;
+
+function showTicketKeypad(input) {
+  activeTicketInput = input;
+  $('ticketKeypad').classList.remove('hidden');
+}
+
+function hideTicketKeypad() {
+  activeTicketInput = null;
+  $('ticketKeypad').classList.add('hidden');
+}
+
+$('ticketKeypad').addEventListener('pointerdown', event => event.preventDefault());
+$('ticketKeypad').addEventListener('click', event => {
+  const key = event.target.dataset.key;
+  if (!key || !activeTicketInput) return;
+  if (key === 'next') {
+    const fields = [...document.querySelectorAll('.ticket-list .opening, .ticket-list .closing')];
+    const position = fields.indexOf(activeTicketInput);
+    if (position >= 0 && position < fields.length - 1) fields[position + 1].focus();
+    else hideTicketKeypad();
+    return;
+  }
+  if (key === 'back') activeTicketInput.value = activeTicketInput.value.slice(0, -1);
+  else if (key === '-') activeTicketInput.value = activeTicketInput.value === '-' ? '' : '-';
+  else activeTicketInput.value = activeTicketInput.value === '-' ? key : `${activeTicketInput.value}${key}`;
+  activeTicketInput.dispatchEvent(new Event('input', { bubbles: true }));
+});
+
 function updateTicketCard(card, index) {
   const stats = ticketStats(index);
   card.querySelector('.ticket-amount').textContent = money(stats.amount);
@@ -106,6 +135,9 @@ function renderTickets() {
     updateTicketCard(card, index);
 
     [opening, closing].forEach(input => {
+      input.readOnly = true;
+      input.inputMode = 'none';
+      input.onfocus = () => showTicketKeypad(input);
       input.oninput = () => {
         state.entries[index] = state.entries[index] || {};
         state.entries[index][input === opening ? 'open' : 'close'] = input.value;
