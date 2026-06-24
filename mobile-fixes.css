@@ -3,6 +3,7 @@ html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: hidden; }
 .print-worksheet { display: none; }
 .ticket-fields input { font-size: 16px !important; }
+.ticket-fields input:focus { border-color: #007c66; box-shadow: 0 0 0 2px #7fe3c380; caret-color: #007c66; outline: 0; }
 body.keypad-open main { padding-bottom: 330px; }
 .ticket-keypad { position: fixed; z-index: 50; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 10px; padding-bottom: max(10px, env(safe-area-inset-bottom)); background: #102a43; box-shadow: 0 -4px 16px #102a4360; transform: translateZ(0); }
 .ticket-keypad button { min-height: 44px; border: 0; border-radius: 7px; background: #fff; color: #102a43; font: 700 20px system-ui, sans-serif; }

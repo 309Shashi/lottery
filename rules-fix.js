@@ -151,7 +151,7 @@ function renderTickets() {
     updateTicketCard(card, index);
 
     [opening, closing].forEach(input => {
-      input.readOnly = true;
+      input.readOnly = false;
       input.inputMode = 'none';
       input.onfocus = () => showTicketKeypad(input);
       input.oninput = () => {
