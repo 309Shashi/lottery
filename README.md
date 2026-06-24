@@ -45,7 +45,7 @@ The worksheet shows every running balance in its final calculation box.
 
 ## Data and QR code
 
-The worksheet stores the current work locally in the browser. The QR code generated from Settings adds a fresh-start flag, so scanning the QR code clears old entries before a new worksheet begins. The Reset button clears today’s entered values while keeping ticket prices.
+The worksheet stores the current work locally in the browser. On the same phone or tablet, the previous closing number for every ticket automatically becomes the next day’s opening number. The QR code generated from Settings starts a fresh worksheet while preserving these saved closing numbers. The Reset button clears today’s entered values while keeping ticket prices.
 
 To make the QR code usable, publish this repository to a static host first, then paste the public `https://` address into Settings.
 

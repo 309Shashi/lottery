@@ -1,13 +1,21 @@
 const STORAGE = 'lottery-count-v3';
+const LAST_CLOSINGS = 'lottery-last-closings-v1';
+const FRESH_WORKSHEET = new URLSearchParams(window.location.search).has('new');
 const startingTickets = Array.from({length:42}, (_, i) => ({name:`Ticket ${i+1}`, price: i < 3 ? 1 : i < 11 ? 2 : i < 19 ? 5 : i < 29 ? 10 : i < 36 ? 20 : i < 40 ? 30 : i === 40 ? 50 : 10}));
-if (new URLSearchParams(window.location.search).has('new')) localStorage.removeItem(STORAGE);
+if (FRESH_WORKSHEET) localStorage.removeItem(STORAGE);
 const state = JSON.parse(localStorage.getItem(STORAGE) || 'null') || { tickets: startingTickets, entries:{}, details:{}, registerCash:'', siteUrl:'' };
 const $ = id => document.getElementById(id);
 const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(value)||0);
 const save = () => localStorage.setItem(STORAGE, JSON.stringify(state));
 function localDate(){const now=new Date();const offset=now.getTimezoneOffset()*60000;return new Date(now-offset).toISOString().slice(0,10)}
+function previousClosings(){try{return JSON.parse(localStorage.getItem(LAST_CLOSINGS)||'{}')}catch{return {}}}
+function rollClosingsToOpenings(){const closings=previousClosings();state.entries={};Object.entries(closings).forEach(([index,closing])=>{if(closing!=='')state.entries[index]={open:closing,close:''}})}
+function rememberClosing(index,closing){const closings=previousClosings();if(closing==='')delete closings[index];else closings[index]=closing;localStorage.setItem(LAST_CLOSINGS,JSON.stringify(closings))}
+const today = localDate();
+if (state.lastReportDate && state.lastReportDate !== today) { rollClosingsToOpenings(); state.details={}; state.lastReportDate=today; save(); }
+else if (!state.lastReportDate) { if (FRESH_WORKSHEET) rollClosingsToOpenings(); state.lastReportDate=today; save(); }
 function updateReportDay(){const value=$('reportDate').value;if(!value)return;$('reportDay').textContent=new Date(`${value}T12:00:00`).toLocaleDateString(undefined,{weekday:'long'})}
-$('reportDate').value = localDate();
+$('reportDate').value = today;
 $('reportDate').onchange = updateReportDay;
 updateReportDay();
 

@@ -156,7 +156,9 @@ function renderTickets() {
       input.onfocus = () => showTicketKeypad(input);
       input.oninput = () => {
         state.entries[index] = state.entries[index] || {};
-        state.entries[index][input === opening ? 'open' : 'close'] = input.value;
+        const field = input === opening ? 'open' : 'close';
+        state.entries[index][field] = input.value;
+        if (field === 'close') rememberClosing(index, input.value);
         save();
         updateTicketCard(card, index);
         renderFinance();
