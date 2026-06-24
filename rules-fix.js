@@ -11,6 +11,7 @@ function ticketStats(index) {
 
   if (opening === '-' && closing === '-') return { ...result(0), emptyBook: true };
   if (opening === '' && closing === '') return result(0);
+  if (opening === '' || closing === '') return result(0);
 
   // The book ended today: count the opening number and every number after it.
   if (numeric(opening) && closing === '-') {
@@ -124,6 +125,9 @@ function updateTicketCard(card, index) {
   const stats = ticketStats(index);
   card.querySelector('.ticket-amount').textContent = money(stats.amount);
   card.querySelector('.ticket-sold').textContent = stats.emptyBook ? 'No tickets' : `${stats.sold} sold`;
+  const error = card.querySelector('.ticket-error');
+  error.textContent = stats.invalid ? stats.message : '';
+  error.classList.toggle('hidden', !stats.invalid);
 }
 
 function renderTickets() {
