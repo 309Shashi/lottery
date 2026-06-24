@@ -1,0 +1,23 @@
+@page { size: letter portrait; margin: 0.28in; }
+
+body { background: #fff; color: #111; font: 9px/1.18 Arial, sans-serif; }
+header, main > :not(#printWorksheet) { display: none !important; }
+main { margin: 0; padding: 0; max-width: none; }
+.print-worksheet { display: block !important; }
+.print-title { text-align: center; font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.print-meta { display: flex; justify-content: space-between; font-weight: 700; margin: 0 2px 5px; }
+.print-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.print-table th, .print-table td { border: 1px solid #222; padding: 2px 3px; height: 12px; text-align: center; overflow: hidden; white-space: nowrap; }
+.print-table th { background: #e8eef3; font-size: 8px; }
+.print-table th:nth-child(1) { width: 7%; }
+.print-table th:nth-child(2) { width: 13%; }
+.print-table th:nth-child(3), .print-table th:nth-child(4) { width: 20%; }
+.print-table th:nth-child(5) { width: 15%; }
+.print-table th:nth-child(6) { width: 25%; }
+.print-table td:nth-child(2), .print-table td:nth-child(6) { text-align: right; }
+.print-footer { display: flex; justify-content: flex-end; margin-top: 7px; }
+.print-ledger { width: 235px; border: 2px solid #111; padding: 6px 8px; }
+.print-ledger-row { display: flex; justify-content: space-between; gap: 15px; padding: 2px 0; }
+.print-ledger-row b { white-space: nowrap; }
+.print-ledger-row.balance { border-top: 1px solid #777; font-weight: 700; }
+.print-ledger-row.final { border-top: 2px solid #111; margin-top: 3px; padding-top: 5px; font-size: 12px; font-weight: 800; }

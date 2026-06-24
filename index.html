@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102a43" />
+    <title>Lottery Count</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="mobile-fixes.css" />
+    <link rel="stylesheet" href="print.css" media="print" />
+  </head>
+  <body>
+    <header>
+      <div class="brand"><span class="brand-mark">$</span><span>Clifton Mini Mart</span></div>
+      <div><button id="resetButton" class="icon-button" aria-label="Reset today's entries" title="Reset today's entries">↺</button><button id="settingsButton" class="icon-button" style="font-size:14px;font-weight:800" aria-label="Change ticket values">⚙ Settings</button></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">DAILY LOTTERY WORKSHEET</p>
+      </section>
+
+      <section class="date-card card">
+        <label for="reportDate">Report date</label>
+        <strong id="reportDay" style="font-size:21px;color:#007c66;text-align:center"></strong>
+        <input id="reportDate" type="date" style="color:#007c66;font-weight:800" />
+      </section>
+
+      <section class="section-heading">
+        <div><p class="eyebrow">STEP 1</p><h2>Ticket count</h2></div>
+      </section>
+      <p id="priceNotice" class="notice hidden"></p>
+      <section id="ticketList" class="ticket-list"></section>
+
+      <section class="section-heading finance-heading">
+        <div><p class="eyebrow">STEP 2</p><h2>Cash check</h2></div>
+      </section>
+      <section class="card finance-card">
+        <div class="cash-line main-line"><span>Scratch off sales</span><strong id="financeLotteryTotal">$0.00</strong></div>
+        <div id="adjustmentList"></div>
+        <div class="expected-total calculation-box">
+          <div class="ledger-row"><span>Scratch off sales</span><b id="ledgerScratch">$0.00</b></div>
+          <div class="ledger-row"><span>− Instances</span><b id="ledgerInstances">$0.00</b></div>
+          <div class="ledger-row subtotal"><span>Balance</span><b id="ledgerAfterInstances">$0.00</b></div>
+          <div class="ledger-row"><span>+ Sales</span><b id="ledgerSales">$0.00</b></div>
+          <div class="ledger-row subtotal"><span>Balance</span><b id="ledgerAfterSales">$0.00</b></div>
+          <div class="ledger-row"><span>− Cashes</span><b id="ledgerCashes">$0.00</b></div>
+          <div class="ledger-row subtotal"><span>Balance</span><b id="ledgerAfterCashes">$0.00</b></div>
+          <div class="ledger-row"><span>− Pull tabs</span><b id="ledgerPullTabs">$0.00</b></div>
+          <div class="ledger-row final"><span>Final total</span><strong id="expectedCash">$0.00</strong></div>
+        </div>
+      </section>
+
+      <button id="saveReport" class="primary-button" hidden>Save today’s report</button>
+      <button id="printReport" class="secondary-button">Export as one-page PDF</button>
+      <section id="printWorksheet" class="print-worksheet" aria-hidden="true"></section>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form method="dialog" class="settings-card">
+        <div class="dialog-title"><div><p class="eyebrow">SETUP</p><h2>Ticket prices</h2></div><button class="icon-button" value="cancel" aria-label="Close settings">×</button></div>
+        <p class="help">Set each ticket name and its price once. These prices stay on this device.</p>
+        <div id="priceEditor" class="price-editor"></div>
+        <button id="addTicket" type="button" class="add-button">＋ Add ticket type</button>
+        <label class="url-field" for="siteUrl">Published website address (for QR code)</label>
+        <input id="siteUrl" type="url" placeholder="https://your-site.example" />
+        <div id="qrArea" class="qr-area hidden"><img id="qrImage" alt="QR code for this website" /><small>Print this QR code after you publish the website.</small></div>
+        <button id="saveSettings" value="default" class="primary-button">Save ticket prices</button>
+      </form>
+    </dialog>
+    <template id="ticketTemplate">
+      <article class="ticket-card">
+        <div class="ticket-top">
+          <span class="ticket-info"><b class="ticket-name"></b><small class="ticket-price"></small></span>
+          <span class="ticket-result"><b class="ticket-amount">$0.00</b><small class="ticket-sold">0 sold</small></span>
+        </div>
+        <div class="ticket-fields">
+          <label>Opening number<input class="opening" inputmode="text" enterkeyhint="next" type="text" autocomplete="off" placeholder="Start or -" /></label>
+          <label>Closing number<input class="closing" inputmode="text" enterkeyhint="next" type="text" autocomplete="off" placeholder="End or -" /></label>
+          <button class="no-tickets" type="button" hidden aria-hidden="true"></button>
+          <p class="ticket-error hidden" hidden aria-hidden="true"></p>
+        </div>
+      </article>
+    </template>
+    <script src="app.js"></script>
+    <script src="rules-fix.js"></script>
+  </body>
+</html>

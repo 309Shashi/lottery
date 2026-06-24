@@ -1,0 +1,35 @@
+/* Keeps the cash-detail rows inside even the narrowest phone screens. */
+body { overflow-x: hidden; }
+.print-worksheet { display: none; }
+.detail-row {
+  grid-template-columns: minmax(0, 1fr) minmax(96px, 42%) !important;
+  gap: 8px !important;
+}
+.detail-row .money-input {
+  width: 100% !important;
+  min-width: 0;
+}
+.detail-row input { min-width: 0; }
+.calculation-box { display: block; max-width: 290px; margin: 22px 0 0 auto; padding: 14px 16px; background: #fff; border: 2px solid #526d82; border-radius: 2px; box-shadow: none; }
+.ledger-row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 5px 0; color: #526d82; font-size: 14px; }
+.ledger-row b { color: #243b53; font-size: 18px; white-space: nowrap; }
+.ledger-row.subtotal { border-top: 1px solid #9fb3c8; color: #243b53; font-weight: 800; }
+.ledger-row.subtotal b { font-size: 20px; }
+.ledger-row.final { margin-top: 7px; padding-top: 10px; border-top: 2px solid #102a43; color: #102a43; font-weight: 800; font-size: 16px; }
+.ledger-row.final strong { color: #102a43; font-size: 27px; white-space: nowrap; }
+.no-tickets {
+  grid-column: 1 / -1;
+  border: 1px dashed #9fb3c8;
+  border-radius: 8px;
+  background: #f7fafc;
+  color: #526d82;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+@media (max-width: 360px) {
+  .date-card { gap: 8px; padding-left: 10px; padding-right: 10px; }
+  #reportDay { font-size: 18px !important; }
+}
