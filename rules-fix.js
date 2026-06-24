@@ -252,7 +252,7 @@ function renderPrintWorksheet() {
 
 $('printReport').onclick = () => {
   renderPrintWorksheet();
-  window.print();
+  window.setTimeout(() => window.print(), 50);
 };
 
 renderTickets();
